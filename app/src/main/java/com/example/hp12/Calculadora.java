@@ -2,16 +2,21 @@ package com.example.hp12;
 
 import java.util.Deque;
 import java.util.LinkedList;
+import java.util.Optional;
+import java.util.function.BiFunction;
 
 public class Calculadora {
-    private static final int MODO_EDITANDO = 0;
-    private static final int MODO_EXIBINDO= 1;
+    public static final int MODO_EDITANDO = 0;
+    public static final int MODO_EXIBINDO= 1;
 
     public String visor = "";
 
     private Deque<Double> operandos;
     private int modo_atual;
 
+    public int getModo(){
+        return modo_atual;
+    }
     public Calculadora(){
         modo_atual = MODO_EXIBINDO;
         operandos = new LinkedList<>();
@@ -37,33 +42,28 @@ public class Calculadora {
         visor="";
     }
 
-    public void soma(){
-        double op1 = operandos.pop();
-        double op2 = operandos.pop();
-        double resultado = op1+op2;
+    public void executarOperacao(BiFunction<Double, Double, Double> operacao){
+        double op1 = Optional.ofNullable(operandos.pollFirst()).orElse(0.0);
+        double op2 = Optional.ofNullable(operandos.pollFirst()).orElse(0.0);
+        double resultado = operacao.apply(op1, op2);
 
         operandos.push(resultado);
         visor = Double.toString(operandos.getFirst());
     }
 
     public void subtracao(){
-        double op1 = operandos.pop();
-        double op2 = operandos.pop();
-        double resultado = op1-op2;
+        executarOperacao((op1, op2) -> op1 - op2);
+    }
 
-        operandos.push(resultado);
-        visor = Double.toString(operandos.getFirst());
+    public void soma(){
+        executarOperacao((op1, op2) -> op1 + op2);
     }
     public void multiplicacao(){
-        double op1 = operandos.pop();
-        double op2 = operandos.pop();
-        double resultado = op1*op2;
-
-        operandos.push(resultado);
-        visor = Double.toString(operandos.getFirst());
+        executarOperacao((op1, op2) -> op1 * op2);
     }
 
     public void divisao(){
+        executarOperacao((op1, op2) -> op1 / op2);
         double op1 = operandos.pop();
         double op2 = operandos.pop();
 
