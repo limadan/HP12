@@ -68,9 +68,9 @@ public class CalculadoraTest {
     public void testDivisao() {
         calculadora.reset();
 
-        calculadora.setNumero("5");
-        calculadora.enter();
         calculadora.setNumero("10");
+        calculadora.enter();
+        calculadora.setNumero("5");
         calculadora.enter();
 
         calculadora.divisao();
@@ -83,9 +83,9 @@ public class CalculadoraTest {
     public void testDivisaoPorZero() {
         calculadora.reset();
 
-        calculadora.setNumero("0");
-        calculadora.enter();
         calculadora.setNumero("10");
+        calculadora.enter();
+        calculadora.setNumero("0");
         calculadora.enter();
 
         calculadora.divisao();
@@ -105,12 +105,18 @@ public class CalculadoraTest {
         calculadora.setNumero("1");
         calculadora.enter();
         calculadora.subtracao();
-        assertEquals("1.0", calculadora.visor);
+        assertEquals("-1.0", calculadora.visor);
 
         calculadora.reset();
         calculadora.setNumero("1");
         calculadora.enter();
         calculadora.multiplicacao();
-        assertEquals("1.0", calculadora.visor);
+        assertEquals("0.0", calculadora.visor);
+
+        calculadora.reset();
+        calculadora.setNumero("1");
+        calculadora.enter();
+        calculadora.divisao();
+        assertEquals("0.0", calculadora.visor);
     }
 }

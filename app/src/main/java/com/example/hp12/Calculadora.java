@@ -47,12 +47,18 @@ public class Calculadora {
         double op2 = Optional.ofNullable(operandos.pollFirst()).orElse(0.0);
         double resultado = operacao.apply(op1, op2);
 
+        if(resultado==Double.POSITIVE_INFINITY){
+            this.reset();
+            this.visor = "Erro!";
+            return;
+        }
+
         operandos.push(resultado);
         visor = Double.toString(operandos.getFirst());
     }
 
     public void subtracao(){
-        executarOperacao((op1, op2) -> op1 - op2);
+        executarOperacao((op1, op2) -> op2 - op1);
     }
 
     public void soma(){
@@ -63,18 +69,6 @@ public class Calculadora {
     }
 
     public void divisao(){
-        executarOperacao((op1, op2) -> op1 / op2);
-        double op1 = operandos.pop();
-        double op2 = operandos.pop();
-
-        if (op2 == 0) {
-            this.reset();
-            visor = "Erro!";
-            return;
-        }
-
-        double resultado = op1/op2;
-        operandos.push(resultado);
-        visor = Double.toString(operandos.getFirst());
+        executarOperacao((op1, op2) -> op2 / op1);
     }
 }

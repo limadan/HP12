@@ -3,7 +3,20 @@
   <component name="deploymentTargetDropDown">
     <value>
       <entry key="CalculadoraTest">
-        <State />
+        <State>
+          <runningDeviceTargetSelectedWithDropDown>
+            <Target>
+              <type value="RUNNING_DEVICE_TARGET" />
+              <deviceKey>
+                <Key>
+                  <type value="SERIAL_NUMBER" />
+                  <value value="ZF523WDPDG" />
+                </Key>
+              </deviceKey>
+            </Target>
+          </runningDeviceTargetSelectedWithDropDown>
+          <timeTargetWasSelectedWithDropDown value="2024-07-25T19:22:13.776269677Z" />
+        </State>
       </entry>
       <entry key="app">
         <State />
@@ -11,7 +24,10 @@
       <entry key="testDivisao()">
         <State />
       </entry>
-      <entry key="testSoma()">
+      <entry key="testDivisaoPorZero()">
+        <State />
+      </entry>
+      <entry key="testOperandosInsuficientes()">
         <State />
       </entry>
       <entry key="testSubtracao()">
