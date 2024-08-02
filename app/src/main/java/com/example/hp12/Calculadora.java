@@ -43,6 +43,9 @@ public class Calculadora {
     }
 
     public void executarOperacao(BiFunction<Double, Double, Double> operacao){
+        if(!visor.isEmpty()){
+            this.enter();
+        }
         double op1 = Optional.ofNullable(operandos.pollFirst()).orElse(0.0);
         double op2 = Optional.ofNullable(operandos.pollFirst()).orElse(0.0);
         double resultado = operacao.apply(op1, op2);

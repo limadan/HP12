@@ -24,6 +24,13 @@ public class MainActivity extends AppCompatActivity {
     Button btn7;
     Button btn8;
     Button btn9;
+    Button btn_ponto;
+    Button btn_clear;
+    Button btn_enter;
+    Button btn_soma;
+    Button btn_sub;
+    Button btn_multi;
+    Button btn_div;
     EditText visor;
 
     @Override
@@ -48,6 +55,13 @@ public class MainActivity extends AppCompatActivity {
         btn7 = findViewById(R.id.btn7);
         btn8 = findViewById(R.id.btn8);
         btn9 = findViewById(R.id.btn9);
+        btn_ponto = findViewById(R.id.btn_ponto);
+        btn_soma = findViewById(R.id.btn_soma);
+        btn_sub = findViewById(R.id.btn_sub);
+        btn_multi = findViewById(R.id.btn_multi);
+        btn_div = findViewById(R.id.btn_div);
+        btn_clear = findViewById(R.id.btn_clear);
+        btn_enter = findViewById(R.id.btn_enter);
 
         visor = findViewById(R.id.visor);
         visor.setShowSoftInputOnFocus(false);
@@ -64,16 +78,72 @@ public class MainActivity extends AppCompatActivity {
         btn7.setOnClickListener(numberClick("7"));
         btn8.setOnClickListener(numberClick("8"));
         btn9.setOnClickListener(numberClick("9"));
+        btn_ponto.setOnClickListener(numberClick("."));
+
+
+        btn_soma.setOnClickListener(somaClick());
+        btn_sub.setOnClickListener(subtracaoClick());
+        btn_multi.setOnClickListener(multiplicacaoClick());
+        btn_div.setOnClickListener(divisaoClick());
+
+        btn_enter.setOnClickListener(enterClick());
+        btn_clear.setOnClickListener(clearClick());
     }
 
     public View.OnClickListener numberClick(String s){
         return (v)-> {
-            /*int inicioSelecao = visor.getSelectionStart() - 1;
-            inicioSelecao = Math.max(inicioSelecao, 0);
-            int fimSelecao = visor.getSelectionEnd();
-            visor.getText().replace(inicioSelecao, fimSelecao, s);*/
+            if(calculadora.getModo()==calculadora.MODO_EXIBINDO){
+                visor.setText("");
+            }
+
+            if(visor.getText().toString().contains(".") && s.equals(".")){
+                return;
+            }
 
             visor.getText().append(s);
+            calculadora.setNumero(s);
+        };
+    }
+
+    public View.OnClickListener enterClick(){
+        return (v)->{
+            calculadora.enter();
+            visor.setText("");
+        };
+    }
+
+    public View.OnClickListener clearClick(){
+        return (v)->{
+            calculadora.reset();
+            visor.setText("");
+        };
+    }
+
+    public View.OnClickListener somaClick(){
+        return (v)->{
+            calculadora.soma();
+            visor.setText(calculadora.visor);
+        };
+    }
+
+    public View.OnClickListener subtracaoClick(){
+        return (v)->{
+            calculadora.subtracao();
+            visor.setText(calculadora.visor);
+        };
+    }
+
+    public View.OnClickListener divisaoClick(){
+        return (v)->{
+            calculadora.divisao();
+            visor.setText(calculadora.visor);
+        };
+    }
+
+    public View.OnClickListener multiplicacaoClick(){
+        return (v)->{
+            calculadora.multiplicacao();
+            visor.setText(calculadora.visor);
         };
     }
 }
