@@ -146,4 +146,34 @@ public class MainActivity extends AppCompatActivity {
             visor.setText(calculadora.visor);
         };
     }
+
+    public View.OnClickListener enterPVClick (){
+        return (v)->{
+            calculadora.enterPV();
+        };
+    }
+
+    public View.OnClickListener enterFVClick (){
+        return (v)->{
+            calculadora.enterFV();
+        };
+    }
+
+    public View.OnClickListener enterIClick (){
+        return (v)->{
+            calculadora.enter_i();
+        };
+    }
+
+    public View.OnClickListener enterNClick (){
+        return (v)->{
+            calculadora.enter_n();
+        };
+    }
+
+    public View.OnClickListener calculatePMTClick (){
+        return (v)->{
+            calculatePMTClick();
+        };
+    }
 }

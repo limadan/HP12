@@ -14,10 +14,20 @@ public class Calculadora {
     private Deque<Double> operandos;
     private int modo_atual;
 
+    public double PV;
+    public double PMT;
+    public double FV;
+    public double i;
+    public double n;
+
     public int getModo(){
         return modo_atual;
     }
     public Calculadora(){
+        PV = 1;
+        FV = 1;
+        i = 0;
+        n = 1;
         modo_atual = MODO_EXIBINDO;
         operandos = new LinkedList<>();
     }
@@ -27,6 +37,39 @@ public class Calculadora {
         }
         modo_atual = MODO_EDITANDO;
         visor+=digito;
+    }
+
+    public void enterPV(){
+        if(modo_atual==MODO_EDITANDO){
+            PV = Double.parseDouble(visor);
+            modo_atual = MODO_EXIBINDO;
+        }
+    }
+
+    public void enterFV(){
+        if(modo_atual==MODO_EDITANDO){
+            FV = Double.parseDouble(visor);
+            modo_atual = MODO_EXIBINDO;
+        }
+    }
+
+    public void enter_i(){
+        if(modo_atual==MODO_EDITANDO){
+            i = Double.parseDouble(visor);
+            modo_atual = MODO_EXIBINDO;
+        }
+    }
+
+    public void enter_n(){
+        if(modo_atual==MODO_EDITANDO){
+            n = Double.parseDouble(visor);
+            modo_atual = MODO_EXIBINDO;
+        }
+    }
+
+    public double calculatePMT(){
+        PMT = (FV - PV*Math.pow(1 + i, n))/(((Math.pow(1+i, n)-1)/i)*(1+i));
+        return PMT;
     }
 
     public void enter(){
@@ -74,4 +117,6 @@ public class Calculadora {
     public void divisao(){
         executarOperacao((op1, op2) -> op2 / op1);
     }
+
+
 }

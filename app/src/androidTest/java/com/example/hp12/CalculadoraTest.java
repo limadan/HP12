@@ -119,4 +119,20 @@ public class CalculadoraTest {
         calculadora.divisao();
         assertEquals("0.0", calculadora.visor);
     }
+
+    @Test
+    public void testPMT (){
+        calculadora.reset();
+        calculadora.setNumero("0.10");
+        calculadora.enter_i();
+        calculadora.setNumero("10");
+        calculadora.enter_n();
+        calculadora.setNumero("1000");
+        calculadora.enterPV();
+        calculadora.setNumero("1000000");
+        calculadora.enterFV();
+
+        calculadora.calculatePMT();
+        assertEquals("56893.31771602636", calculadora.PMT);
+    }
 }
