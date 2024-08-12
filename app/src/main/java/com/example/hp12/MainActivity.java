@@ -31,6 +31,11 @@ public class MainActivity extends AppCompatActivity {
     Button btn_sub;
     Button btn_multi;
     Button btn_div;
+    Button btn_enter_n;
+    Button btn_enter_i;
+    Button btn_enter_fv;
+    Button btn_enter_pv;
+    Button btn_calculate_pmt;
     EditText visor;
 
     @Override
@@ -62,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         btn_div = findViewById(R.id.btn_div);
         btn_clear = findViewById(R.id.btn_clear);
         btn_enter = findViewById(R.id.btn_enter);
+        btn_enter_i = findViewById(R.id.btn_enter_i);
+        btn_enter_n = findViewById(R.id.btn_enter_n);
+        btn_enter_pv = findViewById(R.id.btn_enter_pv);
+        btn_enter_fv = findViewById(R.id.btn_enter_fv);
+        btn_calculate_pmt = findViewById(R.id.btn_calculate_pmt);
 
         visor = findViewById(R.id.visor);
         visor.setShowSoftInputOnFocus(false);
@@ -86,6 +96,12 @@ public class MainActivity extends AppCompatActivity {
         btn_multi.setOnClickListener(multiplicacaoClick());
         btn_div.setOnClickListener(divisaoClick());
 
+        btn_enter_pv.setOnClickListener(enterPV());
+        btn_enter_fv.setOnClickListener(enterFV());
+        btn_enter_i.setOnClickListener(enter_i());
+        btn_enter_n.setOnClickListener(enter_n());
+        btn_calculate_pmt.setOnClickListener(enterPMT());
+
         btn_enter.setOnClickListener(enterClick());
         btn_clear.setOnClickListener(clearClick());
     }
@@ -109,6 +125,41 @@ public class MainActivity extends AppCompatActivity {
         return (v)->{
             calculadora.enter();
             visor.setText("");
+        };
+    }
+
+    public View.OnClickListener enterPV(){
+        return (v)->{
+            calculadora.enterPV();
+            visor.setText(calculadora.visor);
+        };
+    }
+
+    public View.OnClickListener enterFV(){
+        return (v)->{
+            calculadora.enterFV();
+            visor.setText(calculadora.visor);
+        };
+    }
+
+    public View.OnClickListener enter_i(){
+        return (v)->{
+            calculadora.enter_i();
+            visor.setText(calculadora.visor);
+        };
+    }
+
+    public View.OnClickListener enter_n(){
+        return (v)->{
+            calculadora.enter_n();
+            visor.setText(calculadora.visor);
+        };
+    }
+
+    public View.OnClickListener enterPMT(){
+        return (v)->{
+            calculadora.enterPMT();
+            visor.setText(calculadora.visor);
         };
     }
 

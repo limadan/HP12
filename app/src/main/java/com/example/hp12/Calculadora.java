@@ -43,6 +43,9 @@ public class Calculadora {
         if(modo_atual==MODO_EDITANDO){
             PV = Double.parseDouble(visor);
             modo_atual = MODO_EXIBINDO;
+            visor="";
+        }else {
+            calculatePV();
         }
     }
 
@@ -50,6 +53,19 @@ public class Calculadora {
         if(modo_atual==MODO_EDITANDO){
             FV = Double.parseDouble(visor);
             modo_atual = MODO_EXIBINDO;
+            visor="";
+        }else{
+            this.calculateFV();
+        }
+    }
+
+    public void enterPMT(){
+        if(modo_atual==MODO_EDITANDO){
+            PMT = Double.parseDouble(visor);
+            modo_atual = MODO_EXIBINDO;
+            visor="";
+        }else {
+            calculatePMT();
         }
     }
 
@@ -57,6 +73,9 @@ public class Calculadora {
         if(modo_atual==MODO_EDITANDO){
             i = Double.parseDouble(visor);
             modo_atual = MODO_EXIBINDO;
+            visor="";
+        }else{
+            calculate_i();
         }
     }
 
@@ -64,12 +83,35 @@ public class Calculadora {
         if(modo_atual==MODO_EDITANDO){
             n = Double.parseDouble(visor);
             modo_atual = MODO_EXIBINDO;
+            visor="";
+        }else{
+            calculate_n();
         }
     }
 
-    public double calculatePMT(){
+    public void calculatePMT(){
         PMT = (FV - PV*Math.pow(1 + i, n))/(((Math.pow(1+i, n)-1)/i)*(1+i));
-        return PMT;
+        visor = Double.toString(PMT);
+    }
+
+    public void calculatePV(){
+        PMT = (FV - PV*Math.pow(1 + i, n))/(((Math.pow(1+i, n)-1)/i)*(1+i));
+        visor = Double.toString(PV);
+    }
+
+    public void calculateFV(){
+        FV = PV * Math.pow(1 + i, n);
+        visor = Double.toString(FV);
+    }
+
+    public void calculate_i(){
+        i = Math.pow(FV / PV, 1.0 / n) - 1;
+        visor = Double.toString(i);
+    }
+
+    public void calculate_n(){
+        n = Math.log(FV / PV) / Math.log(1 + i);
+        visor = Double.toString(n);
     }
 
     public void enter(){
@@ -82,6 +124,10 @@ public class Calculadora {
     public void reset(){
         modo_atual = MODO_EXIBINDO;
         operandos = new LinkedList<>();
+        PV = 1;
+        FV = 1;
+        i = 0;
+        n = 1;
         visor="";
     }
 
