@@ -90,7 +90,7 @@ public class Calculadora {
     }
 
     public void calculatePMT(){
-        PMT = (PV*Math.pow(1 + i, n)*i)/(Math.pow(1 + i, n)-1);
+        PMT = (FV*i)/(Math.pow(1 + i, n)-1);
         visor = Double.toString(PMT);
     }
 
