@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         visor = findViewById(R.id.visor);
         visor.setShowSoftInputOnFocus(false);
 
-        calculadora = new Calculadora();
+        calculadora = new ViewModelProvider(this).get(Calculadora.class);
 
         btn0.setOnClickListener(numberClick("0"));
         btn1.setOnClickListener(numberClick("1"));
@@ -195,36 +196,6 @@ public class MainActivity extends AppCompatActivity {
         return (v)->{
             calculadora.multiplicacao();
             visor.setText(calculadora.visor);
-        };
-    }
-
-    public View.OnClickListener enterPVClick (){
-        return (v)->{
-            calculadora.enterPV();
-        };
-    }
-
-    public View.OnClickListener enterFVClick (){
-        return (v)->{
-            calculadora.enterFV();
-        };
-    }
-
-    public View.OnClickListener enterIClick (){
-        return (v)->{
-            calculadora.enter_i();
-        };
-    }
-
-    public View.OnClickListener enterNClick (){
-        return (v)->{
-            calculadora.enter_n();
-        };
-    }
-
-    public View.OnClickListener calculatePMTClick (){
-        return (v)->{
-            calculatePMTClick();
         };
     }
 }
